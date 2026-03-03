@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="CardGame/CardGame.vcxproj" Id="aac0acc9-9388-432e-8783-186172754bf5" />
+  <Project Path="LinearDataStructure/LinearDataStructure.vcxproj" Id="bcde1b49-be06-4a18-bfa6-bf23004e3e06" />
+  <Project Path="Nonlinear/Nonlinear.vcxproj" Id="3e94f234-df5a-417c-83e1-3cf8107bf405" />
+</Solution>
