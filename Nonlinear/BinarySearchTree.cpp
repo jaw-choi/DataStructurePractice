@@ -148,7 +148,7 @@ void BinarySearchTree::Delete(std::string name)
     else {
         z->parent->right = child;
     }
-    std::cout << "Delete " << name << std::endl;
+    std:: cout << "Delete " << name << std::endl;
     delete z;
 }
 
