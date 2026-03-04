@@ -28,6 +28,8 @@ int main(void)
         }
         else if (input == "undo" || input == "UNDO")
         {
+            if (st.undo.empty())
+                continue;
             q.Deque();
             st.Undo(st.Top(st.undo));
             st.UndoPop();
