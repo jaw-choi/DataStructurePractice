@@ -3,54 +3,86 @@
 #include <vector>
 #include <iostream>
 
+
 class Stack
 {
 public:
-    void Undo(char c)
+    static constexpr int Capacity = 100;
+public:
+    Stack() : undoTop(-1), redoTop(-1) {}
+
+    void Push(char c)
     {
-        Print(c);
-        redo.push_back(c);
+        undo[++undoTop] = c;
     }
 
-    void RedoPop()
+    void Undo()
     {
-        if (IsEmpty(redo)) return;
-        redo.pop_back();
+        if (undoTop == -1)
+            return;
+        char ch = undo[undoTop--];
+        Print(ch);
+        redo[++redoTop] = ch;
     }
 
-    void UndoPop()
+    void Redo()
     {
-        if (IsEmpty(undo)) return;
-        undo.pop_back();
+        if (redoTop == -1)
+            return;
+
+        char ch = redo[redoTop--];
+        Print(ch);
+        undo[++undoTop] = ch;
     }
 
+    bool IsUndoEmpty()
+    {
+        return undoTop == -1;
+    }
 
-    void Redo(char c)
+    bool IsRedoEmpty()
     {
-        Print(c);
-        undo.push_back(c);
+        return redoTop == -1;
     }
-    
-    char Top(const std::vector<char>& v)
+
+    char RedoTop()
     {
-        if (IsEmpty(v)) return '\0';
-        return v.back();
+        return redo[redoTop];
     }
+
 
     void Show()
     {
-        std::cout << "Undo: ";
-        for (int i = undo.size() - 1; i >= 0; i--)
+        if (undoTop != -1)
         {
-            std::cout << undo[i] << ", ";
+
+            std::cout << "Undo: ";
+            for (int i = 0; i < undoTop+1; i++)
+            {
+                std::cout << undo[i] << ", ";
+            }
+            std::cout << std::endl;
         }
-        std::cout << std::endl;
-        std::cout << "Redo: ";
-        for (int i = redo.size() - 1; i >= 0; i--)
+        else
         {
-            std::cout << redo[i] << ", ";
+
+            std::cout << "Undo is empty \n";
         }
-        std::cout << std::endl;
+        if (redoTop != -1)
+        {
+
+            std::cout << "Redo: ";
+            for (int i = 0; i < redoTop+1; i++)
+            {
+                std::cout << redo[i] << ", ";
+            }
+            std::cout << std::endl;
+        }
+        else
+        {
+
+            std::cout << "Redo is empty \n";
+        }
 
     }
     void Print(char c)
@@ -58,14 +90,11 @@ public:
         std::cout << c << "실행." << std::endl;
     }
 
-    bool IsEmpty(const std::vector<char>& v)
-    {
-        return v.size() == 0;
-    }
 
-    
 public:
-    std::vector<char> undo;
-    std::vector<char> redo;
+    int undoTop = -1;
+    int redoTop = -1;
+    char undo[Capacity];
+    char redo[Capacity];
 };
 

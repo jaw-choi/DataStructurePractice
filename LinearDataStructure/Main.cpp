@@ -23,36 +23,39 @@ int main(void)
             input == "a" || input == "b" || input == "c" || input == "d" || input == "e")
         {
             q.Push(input[0]);
-            st.RedoPop();
-            st.undo.push_back(input[0]);
+            st.Push(input[0]);
+            //st.RedoPop();
+            //st.undo.push_back(input[0]);
         }
         else if (input == "undo" || input == "UNDO")
         {
-            if (st.undo.empty())
+            if (st.IsUndoEmpty())
+            {
+                std::cout << "undo is empty." << std::endl;
                 continue;
+            }
             q.Deque();
-            st.Undo(st.Top(st.undo));
-            st.UndoPop();
-            //q.Pop();
+            st.Undo();
         }
         else if (input == "redo" || input == "REDO")
         {
-            if (st.IsEmpty(st.redo))
+            if (st.IsRedoEmpty())
             {
                 std::cout << "redo is empty." << std::endl;
                 continue;
             }
-            st.Redo(st.Top(st.redo));
-            q.Push(st.Top(st.redo));
-            st.RedoPop();
+            q.Push(st.RedoTop());
+            st.Redo();
         }
         else if (input == "show")
         {
             st.Show();
         }
         else
+        {
+            std::cout << "Wrong Command.\n";
             continue;
-        
+        }
 
         q.Print();
     }

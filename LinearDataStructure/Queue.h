@@ -6,7 +6,9 @@
 class Queue
 {
 public:
-    Queue() : capacity(100), front(0), rear(0), size_(0)
+    static constexpr int Capacity = 100;
+public:
+    Queue() : front(0), rear(0), size_(0)
     {
 
     }
@@ -14,7 +16,7 @@ public:
 
     void Push(const char& ch)
     {
-        rear = (rear + 1) % (capacity+1);
+        rear = (rear + 1) % (Capacity +1);
         inputQueue[rear] = ch;
         size_++;
     }
@@ -22,7 +24,7 @@ public:
     void Pop()
     {
         if (IsEmpty()) return;
-        front = (front + 1) % (capacity + 1);
+        front = (front + 1) % (Capacity + 1);
         inputQueue[front] = 0;
         size_--;
     }
@@ -31,7 +33,7 @@ public:
     {
         if (IsEmpty()) return;
         inputQueue[rear] = 0;
-        rear = (rear - 1) % (capacity + 1);
+        rear = (rear - 1) % (Capacity + 1);
         size_--;
     }
 
@@ -41,7 +43,7 @@ public:
         {
             __debugbreak();
         }
-        return inputQueue[(front + 1) % (capacity + 1)];
+        return inputQueue[(front + 1) % (Capacity + 1)];
     }
 
     bool IsEmpty() const
@@ -54,13 +56,12 @@ public:
         std::cout << "현재 Queue에 있는 char는 ";
         for (int i = 0; i < size_; i++)
         {
-            std::cout << inputQueue[(front + i + 1 + 100) % (capacity)] <<", ";
+            std::cout << inputQueue[(front + i + 1 + 100) % (Capacity)] <<", ";
         }
         std::cout << std::endl;
     }
 public:
-    char inputQueue[100];
-    int capacity = 100;
+    char inputQueue[Capacity];
     int front = 0;
     int rear = 0;
     int size_;

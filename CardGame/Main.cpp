@@ -27,7 +27,7 @@ int main(void)
     const char* path = "../cardInfo.csv";
     CardInfo card(path);
     int index = 0;
-    int _size = card.cards.size();
+    size_t _size = card.cards.size();
     printCard(card.cards[0]);
 
     while (true)

@@ -14,6 +14,8 @@ class BinarySearchTree
         Node* right;
     };
 public:
+    static constexpr int Capacity = 100;
+public:
     BinarySearchTree(std::string name, int score);
     ~BinarySearchTree();
 
@@ -29,7 +31,5 @@ public:
     void Top(int k);
 private:
     Node* root;
-
-    static const int Capacity = 100;
 };
 

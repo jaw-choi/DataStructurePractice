@@ -18,6 +18,8 @@
 class HashTable
 {
 public:
+    static constexpr int bucketCount = 13;
+public:
     HashTable();
     ~HashTable();
 public:
@@ -27,7 +29,6 @@ public:
     void Remove(std::string name);
     void ShowList();
 private:
-    static const int bucketCount = 13;
     std::vector<std::pair<std::string, int>> table[bucketCount];
 };
 
